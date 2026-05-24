@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>COMP90051 Statistical Machine Learning 学习站</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="gate-open">
+    <section class="language-gate" id="languageGate" aria-labelledby="languageTitle">
+      <div class="language-card">
+        <p class="eyebrow">COMP90051 Statistical Machine Learning</p>
+        <h1 id="languageTitle">Choose Your Learning Mode</h1>
+        <p>先选择语言版本。你可以用双语模式建立概念，也可以切到纯英文模式训练课程表达。</p>
+        <div class="language-options">
+          <button type="button" class="language-option" data-lang="bilingual">
+            <strong>Bilingual</strong>
+            <span>中文 + English explanations</span>
+          </button>
+          <button type="button" class="language-option" data-lang="english">
+            <strong>English Only</strong>
+            <span>A clean course-style English version</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="app-shell" id="appShell" aria-hidden="true">
+      <aside class="rail" aria-label="课程导航">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">SML</div>
+          <div>
+            <h1>StatML Studio</h1>
+            <p id="brandSubtitle">从 0 开始学 COMP90051</p>
+          </div>
+        </div>
+
+        <div class="progress-panel">
+          <div class="progress-meta">
+            <span id="progressLabel">学习进度</span>
+            <strong id="progressText">0 / 24</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div id="progressFill"></div>
+          </div>
+        </div>
+
+        <label class="search-box">
+          <span id="searchLabel">搜索</span>
+          <input id="searchInput" type="search" placeholder="linear, Bayesian, PGM...">
+        </label>
+
+        <div class="phase-tabs" id="phaseTabs" aria-label="学习阶段"></div>
+        <div class="lesson-list" id="lessonList"></div>
+      </aside>
+
+      <main class="workspace">
+        <section class="topbar">
+          <div>
+            <p class="eyebrow" id="topEyebrow">Lecture-note order, rebuilt as a study path</p>
+            <h2 id="pageTitle">先建立地基，再进入模型</h2>
+          </div>
+          <div class="top-actions">
+            <button class="ghost-button" id="resetProgressButton" type="button">重置进度</button>
+            <button class="ghost-button" id="changeLanguageButton" type="button">切换语言</button>
+            <a class="source-link" href="https://github.com/infinityglow/COMP90051-Statistical-Machine-Learning/tree/master" target="_blank" rel="noreferrer">原始仓库</a>
+          </div>
+        </section>
+
+        <section class="overview-grid" aria-label="学习概览">
+          <article class="stat-card">
+            <span id="stat1Label">课程结构</span>
+            <strong id="stat1Value">24 lectures</strong>
+            <p id="stat1Text">按讲义顺序组织为 4 个阶段，每讲只保留学习决策需要的信息。</p>
+          </article>
+          <article class="stat-card">
+            <span id="stat2Label">建议节奏</span>
+            <strong id="stat2Value">8 weeks</strong>
+            <p id="stat2Text">每周 3 讲左右，先做概念检查，再打开 PDF 深挖推导。</p>
+          </article>
+          <article class="stat-card">
+            <span id="stat3Label">交互重点</span>
+            <strong id="stat3Value">4 labs</strong>
+            <p id="stat3Text">线性分隔、贝叶斯更新、bandit、EM/GMM，覆盖课程主线。</p>
+          </article>
+        </section>
+
+        <section class="study-grid">
+          <article class="lesson-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" id="lessonPhase">Foundation</p>
+                <h3 id="lessonTitle">Lecture 1</h3>
+              </div>
+              <label class="done-toggle">
+                <input id="doneToggle" type="checkbox">
+                <span>已完成</span>
+              </label>
+            </div>
+
+            <div class="lesson-summary" id="lessonSummary"></div>
+
+            <div class="lesson-sections">
+              <div>
+                <h4 id="goalsHeading">学习目标</h4>
+                <ul id="goalList"></ul>
+              </div>
+              <div>
+                <h4 id="prepHeading">先补什么</h4>
+                <ul id="prepList"></ul>
+              </div>
+              <div>
+                <h4 id="practiceHeading">动手练习</h4>
+                <ul id="practiceList"></ul>
+              </div>
+            </div>
+
+            <div class="quiz-box">
+              <div>
+                <h4 id="quizHeading">检查点</h4>
+                <p id="quizQuestion"></p>
+              </div>
+              <button id="revealAnswerButton" type="button">显示答案</button>
+              <p class="quiz-answer" id="quizAnswer"></p>
+            </div>
+
+            <div class="resource-row">
+              <a id="pdfLink" href="#" target="_blank" rel="noreferrer">打开本地讲义 PDF</a>
+              <button id="startInteractiveButton" type="button">开始 Lecture 1 互动课</button>
+              <span id="lectureMeta"></span>
+            </div>
+          </article>
+
+          <article class="pdf-panel">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Reference</p>
+                <h3 id="previewHeading">讲义第一页</h3>
+              </div>
+              <button class="ghost-button" id="togglePdfButton" type="button">隐藏</button>
+            </div>
+            <div class="preview-body" id="previewBody">
+              <img id="pdfPreview" alt="当前 lecture 的第一页预览">
+            </div>
+          </article>
+        </section>
+
+        <section class="labs-section" aria-label="交互实验室">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" id="labsEyebrow">Interactive labs</p>
+              <h3 id="labsHeading">把公式压成可以动的直觉</h3>
+            </div>
+            <div class="lab-tabs" id="labTabs" role="tablist"></div>
+          </div>
+
+          <div class="lab-card" id="linearLab">
+            <div class="lab-copy">
+              <h4 id="linearLabTitle">线性分类器: Logistic / SVM 的共同骨架</h4>
+              <p id="linearLabText">拖动滑杆观察决策边界、margin 和训练点分类结果。先把“超平面”看懂，再回去读 Lecture 4, 13, 14 会轻很多。</p>
+              <div class="control-grid">
+                <label>weight x<input id="linearW1" type="range" min="-4" max="4" step="0.1" value="1.2"></label>
+                <label>weight y<input id="linearW2" type="range" min="-4" max="4" step="0.1" value="-1"></label>
+                <label>bias<input id="linearBias" type="range" min="-3" max="3" step="0.1" value="0"></label>
+              </div>
+              <p class="metric-line" id="linearMetrics"></p>
+            </div>
+            <canvas id="linearCanvas" width="640" height="420" aria-label="线性分类器交互图"></canvas>
+          </div>
+
+          <div class="lab-card hidden" id="bayesLab">
+            <div class="lab-copy">
+              <h4 id="bayesLabTitle">贝叶斯更新: Beta-Binomial</h4>
+              <p id="bayesLabText">把先验看成“还没观察数据前的信念”，滑动观测数量，看 posterior 如何被数据拉动。对应 Lecture 16, 17。</p>
+              <div class="control-grid">
+                <label>prior alpha<input id="alphaInput" type="range" min="1" max="12" step="1" value="2"></label>
+                <label>prior beta<input id="betaInput" type="range" min="1" max="12" step="1" value="2"></label>
+                <label>successes<input id="successInput" type="range" min="0" max="40" step="1" value="8"></label>
+                <label>failures<input id="failureInput" type="range" min="0" max="40" step="1" value="4"></label>
+              </div>
+              <p class="metric-line" id="bayesMetrics"></p>
+            </div>
+            <canvas id="bayesCanvas" width="640" height="420" aria-label="贝叶斯后验曲线"></canvas>
+          </div>
+
+          <div class="lab-card hidden" id="banditLab">
+            <div class="lab-copy">
+              <h4 id="banditLabTitle">Multi-armed bandit: 探索 vs 利用</h4>
+              <p id="banditLabText">对比 epsilon-greedy 和 UCB。你会看到短期贪心为什么容易错过真正高回报的 arm。对应 Lecture 15。</p>
+              <div class="control-grid">
+                <label><span id="policyLabel">策略</span>
+                  <select id="banditPolicy">
+                    <option value="epsilon">epsilon-greedy</option>
+                    <option value="ucb">UCB</option>
+                  </select>
+                </label>
+                <label>epsilon<input id="epsilonInput" type="range" min="0" max="0.6" step="0.02" value="0.12"></label>
+              </div>
+              <div class="button-row">
+                <button id="banditStepButton" type="button">运行 1 次</button>
+                <button id="banditBurstButton" type="button">运行 50 次</button>
+                <button class="ghost-button" id="banditResetButton" type="button">重置</button>
+              </div>
+              <p class="metric-line" id="banditMetrics"></p>
+            </div>
+            <canvas id="banditCanvas" width="640" height="420" aria-label="bandit 策略表现"></canvas>
+          </div>
+
+          <div class="lab-card hidden" id="emLab">
+            <div class="lab-copy">
+              <h4 id="emLabTitle">GMM + EM: 让隐藏标签自己浮出来</h4>
+              <p id="emLabText">每点一次 EM step，就交替更新 responsibility 和参数。先看直觉，再读 Lecture 22, 23 的 Jensen 推导。</p>
+              <div class="control-grid">
+                <label>mean A<input id="meanAInput" type="range" min="-3" max="3" step="0.1" value="-1.7"></label>
+                <label>mean B<input id="meanBInput" type="range" min="-3" max="3" step="0.1" value="1.5"></label>
+              </div>
+              <div class="button-row">
+                <button id="emStepButton" type="button">EM step</button>
+                <button class="ghost-button" id="emResetButton" type="button">重置</button>
+              </div>
+              <p class="metric-line" id="emMetrics"></p>
+            </div>
+            <canvas id="emCanvas" width="640" height="420" aria-label="GMM EM 过程"></canvas>
+          </div>
+        </section>
+
+        <section class="roadmap-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">8-week route</p>
+              <h3 id="roadmapHeading">建议学习节奏</h3>
+            </div>
+          </div>
+          <div class="week-grid" id="weekGrid"></div>
+        </section>
+      </main>
+    </div>
+
+    <section class="lesson-player hidden" id="lessonPlayer" aria-hidden="true">
+      <div class="player-shell">
+        <header class="player-topbar">
+          <button class="ghost-button" id="closePlayerButton" type="button">退出</button>
+          <div class="player-progress" aria-label="Interactive lesson progress">
+            <div id="playerProgressFill"></div>
+          </div>
+          <div class="player-stats">
+            <span id="playerHearts">3 hearts</span>
+            <span id="playerXp">0 XP</span>
+          </div>
+        </header>
+
+        <main class="player-stage" id="playerStage"></main>
+      </div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
